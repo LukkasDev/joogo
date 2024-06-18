@@ -15,6 +15,10 @@ let score;
 let d;
 let game;
 
+// Variáveis para controle de toque
+let touchStartX = 0;
+let touchStartY = 0;
+
 function init() {
   snake = [];
   snake[0] = { x: 9 * box, y: 10 * box };
@@ -43,6 +47,41 @@ function direction(event) {
     d = 'RIGHT';
   } else if (key == 40 && d != 'UP') {
     d = 'DOWN';
+  }
+}
+
+// Função para capturar eventos de toque
+canvas.addEventListener('touchstart', handleTouchStart, false);
+canvas.addEventListener('touchmove', handleTouchMove, false);
+
+function handleTouchStart(event) {
+  event.preventDefault();
+  touchStartX = event.touches[0].clientX;
+  touchStartY = event.touches[0].clientY;
+}
+
+function handleTouchMove(event) {
+  event.preventDefault();
+  let touchEndX = event.touches[0].clientX;
+  let touchEndY = event.touches[0].clientY;
+
+  let dx = touchEndX - touchStartX;
+  let dy = touchEndY - touchStartY;
+
+  if (Math.abs(dx) > Math.abs(dy)) {
+    // Movimento horizontal
+    if (dx > 0 && d != 'LEFT') {
+      d = 'RIGHT';
+    } else if (dx < 0 && d != 'RIGHT') {
+      d = 'LEFT';
+    }
+  } else {
+    // Movimento vertical
+    if (dy > 0 && d != 'UP') {
+      d = 'DOWN';
+    } else if (dy < 0 && d != 'DOWN') {
+      d = 'UP';
+    }
   }
 }
 
@@ -97,9 +136,9 @@ function draw() {
     y: snakeY
   };
 
-  if (snakeX < 0 || snakeY < 0 || snakeX > canvas.width || snakeY > canvas.height || collision(newHead, snake)) {
+  if (snakeX < 0 || snakeY < 0 || snakeX >= canvas.width || snakeY >= canvas.height || collision(newHead, snake)) {
     clearInterval(game);
-    alert('Fim do Jogo');
+    alert('Game Over');
   }
 
   snake.unshift(newHead);
