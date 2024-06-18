@@ -43,4 +43,33 @@ body {
   #resetButton:hover {
     background-color: #45a049;
   }
-  
+
+/* Estilos para os botões de controle */
+.controls-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.controls-container button {
+  width: 75px;
+  height: 50px;
+  margin: 10px;
+  font-size: 24px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.controls-container button:hover {
+  background-color: #45a049;
+}
+
