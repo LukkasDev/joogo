@@ -2,6 +2,10 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const resetButton = document.getElementById('resetButton');
 const scoreDisplay = document.getElementById('score');
+const leftButton = document.getElementById('leftButton');
+const upButton = document.getElementById('upButton');
+const rightButton = document.getElementById('rightButton');
+const downButton = document.getElementById('downButton');
 
 const box = 20; // Tamanho de cada quadrado da cobrinha e da comida
 const canvasSize = 20; // Tamanho do canvas (20x20 quadrados)
@@ -143,6 +147,31 @@ function draw() {
 
   snake.unshift(newHead);
 }
+
+// Event listeners para os botões de controle
+leftButton.addEventListener('click', function() {
+  if (d != 'RIGHT') {
+    d = 'LEFT';
+  }
+});
+
+upButton.addEventListener('click', function() {
+  if (d != 'DOWN') {
+    d = 'UP';
+  }
+});
+
+rightButton.addEventListener('click', function() {
+  if (d != 'LEFT') {
+    d = 'RIGHT';
+  }
+});
+
+downButton.addEventListener('click', function() {
+  if (d != 'UP') {
+    d = 'DOWN';
+  }
+});
 
 resetButton.addEventListener('click', init);
 document.addEventListener('keydown', direction);
