@@ -97,7 +97,7 @@ function draw() {
     y: snakeY
   };
 
-  if (snakeX < 0 || snakeY < 0 || snakeX >= canvas.width || snakeY >= canvas.height || collision(newHead, snake)) {
+  if (snakeX < 0 || snakeY < 0 || snakeX > canvas.width || snakeY > canvas.height || collision(newHead, snake)) {
     clearInterval(game);
     alert('Fim do Jogo');
   }
